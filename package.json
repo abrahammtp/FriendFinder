@@ -1,0 +1,36 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "We are going to build a friends finder/dating app using express. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abrahammtp/FriendFinder.git"
+  },
+  "keywords": [
+    "express",
+    "npm",
+    "friends",
+    "algorithm",
+    "questions",
+    "answers",
+    "routes",
+    "API's",
+    "get",
+    "post",
+    "app"
+  ],
+  "author": "Abraham Torres Pinto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abrahammtp/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/abrahammtp/FriendFinder#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
