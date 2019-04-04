@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Reset CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
-    <!-- Bootstrap Link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Style CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
 </head>
@@ -157,21 +158,7 @@
     </div>
 
 
-
-
-    <!-- Bootstrap Links -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-        <!-- <script type="text/javascript">
+        <script type="text/javascript">
             // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
             // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
             // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
@@ -187,7 +174,7 @@
                             isValid = false;
                         }
                     });
-        
+    
                     $(".custom-select").each(function () {
                         if ($(this).val() === "") {
                             isValid = false;
@@ -199,11 +186,12 @@
                 if (validateForm()) {
                     // Here we grab the form elements
                     var newFriend = {
-                        name: $("#name-input").val().trim(),
-                        photo: $("#link-input").val().trim(),
+                        name: $("#nameInput").val().trim(),
+                        photo: $("#linkInput").val().trim(),
                         scores: [
                             $("#q1").val(),
                             $("#q2").val(),
+                            $("#q3").val(),
                             $("#q3").val(),
                             $("#q4").val(),
                             $("#q5").val(),
@@ -215,38 +203,14 @@
                         ]
                     };
         
-                    $.post("/api/friends", newFriend);
-        
-        
-        
-                    // This line is the magic. It"s very similar to the standard ajax function we used.
-                    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-                    // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-                    // depending on if a tables is available or not.
-        
-                    //   $.post("/api/friends", newFriend,
-                    //     function(data) {
-        
-                    //       // Clear the form when submitting
-                    //       $("#name-input").val("");
-                    //       $("#link-input").val("");
-                    //       $("#q1").val("");
-                    //       $("#q2").val("");
-                    //       $("#q3").val("");
-                    //       $("#q4").val("");
-                    //       $("#q5").val("");
-                    //       $("#q6").val("");
-                    //       $("#q7").val("");
-                    //       $("#q8").val("");
-                    //       $("#q9").val("");
-                    //       $("#q10").val("");
-        
-                    //     });
+                    $.post("/api/friends", newFriend, function(data) {
+                        console.log(data);
+                    });
         
                 } else {
-                    alert("Please fill out all fields before submitting!");
+                    alert("Please fill out all fields before submitting your answers!");
                 }
-            }); -->
+            });
         
         </script>
 </body>
