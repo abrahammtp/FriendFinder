@@ -9,9 +9,9 @@
     <!-- Reset CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Style CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
 </head>
@@ -31,7 +31,7 @@
                     placeholder="Enter your name">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Link to photo image (Required)</label>
+                <label for="exampleInputPassword1">Link to photo (Required)</label>
                 <input type="link" class="form-control" id="linkInput" placeholder="Copy link here">
             </div>
         </form>
@@ -153,67 +153,97 @@
                     <br>
         </div>
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary submit">Submit</button>
+        <button type="submit" class="btn btn-primary submit" data-toggle="modal" data-target="#results-modal">Submit</button>
 
     </div>
+            <!-- Modal content-->
+            <div class="modal fade" id="results-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Your best match!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                                <h2 id="match-name"></h2>
+                                <img id="match-photo" alt="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+    <script type="text/javascript">
 
-        <script type="text/javascript">
-            // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
-            // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-            // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-            // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
-        
-            $(".submit").on("click", function (event) {
-                event.preventDefault();
-        
-                function validateForm() {
-                    var isValid = true;
-                    $(".form-control").each(function () {
-                        if ($(this).val() === "") {
-                            isValid = false;
-                        }
-                    });
-    
-                    $(".custom-select").each(function () {
-                        if ($(this).val() === "") {
-                            isValid = false;
-                        }
-                    });
-                    return isValid;
-                }
-        
-                if (validateForm()) {
-                    // Here we grab the form elements
-                    var newFriend = {
-                        name: $("#nameInput").val().trim(),
-                        photo: $("#linkInput").val().trim(),
-                        scores: [
-                            $("#q1").val(),
-                            $("#q2").val(),
-                            $("#q3").val(),
-                            $("#q3").val(),
-                            $("#q4").val(),
-                            $("#q5").val(),
-                            $("#q6").val(),
-                            $("#q7").val(),
-                            $("#q8").val(),
-                            $("#q9").val(),
-                            $("#q10").val(),
-                        ]
-                    };
-        
-                    $.post("/api/friends", newFriend, function(data) {
-                        console.log(data);
-                    });
-        
-                } else {
-                    alert("Please fill out all fields before submitting your answers!");
-                }
-            });
-        
-        </script>
+        $(".submit").on("click", function (event) {
+            event.preventDefault();
+
+            function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+
+                $(".custom-select").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
+
+            if (validateForm()) {
+                // Here we grab the form elements
+                var newFriend = {
+                    name: $("#nameInput").val().trim(),
+                    photo: $("#linkInput").val().trim(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q10").val(),
+                    ]
+                };
+
+                $.post("/api/friends", newFriend)
+                    .then(function (data) {
+
+                        $("#match-name").text(data.name);
+                        $("#match-photo").attr("src", data.photo);
+
+                        $("#nameInput").val("");
+                        $("#linkInput").val("");
+                        $("#q1").val("");
+                        $("#q2").val("");
+                        $("#q3").val("");
+                        $("#q4").val("");
+                        $("#q5").val("");
+                        $("#q6").val("");
+                        $("#q7").val("");
+                        $("#q8").val("");
+                        $("#q9").val("");
+                        $("#q10").val("");
+
+                    })
+
+            } else {
+                alert("Please fill out all fields before submitting your answers!");
+            }
+
+        });
+
+    </script>
 </body>
 
 </html>
-
