@@ -1,4 +1,4 @@
-var friends = [
+var friendsArray = [
     {
         name: "Sarah",
         photo: "https://pbs.twimg.com/profile_images/1053361269313622016/Aw0gEqQR_400x400.jpg",
@@ -49,4 +49,4 @@ var friends = [
     },
 ];
 
-module.exports = friends;
+module.exports = friendsArray;

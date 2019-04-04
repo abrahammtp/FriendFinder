@@ -1,4 +1,4 @@
-var friendsData = require("../data/friends");
+var friendsData = require("../data/friends.js");
 
 module.exports = function (app) {
 
@@ -6,7 +6,7 @@ module.exports = function (app) {
         res.json(friendsData);
       });
 
-    app.post("/api/survey", function (req, res) {
+    app.post("/api/friends", function (req, res) {
         friendsData.push(req.body);
         res.json(true);
     });
