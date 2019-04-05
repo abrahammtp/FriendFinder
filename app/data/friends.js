@@ -1,3 +1,4 @@
+// var friendsArray is going to contain the data of our hard-coded friends, used to compare the new player
 var friendsArray = [
     {
         name: "Sarah",

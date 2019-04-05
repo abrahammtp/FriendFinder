@@ -1,7 +1,7 @@
 .jumbotron {
     width: 70%;
-    margin-left: 200px;
-    margin-top: 200px;
+    margin-left: 400px;
+    margin-top: 400px;
 }
 
 .survey-questions {
@@ -9,4 +9,8 @@
     margin-top: 100px;
     margin-left: 100px;
     margin-bottom: 100px;
+}
+
+body {
+    background: red;
 }

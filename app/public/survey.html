@@ -8,18 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Reset CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Style CSS file -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../public/css/style.css">
 </head>
 
 <body>
 
     <div class="survey-questions">
-        <!-- Form -->
+        <!-- Form where the user is going to input their name and link a photo -->
         <form>
             <h1>Survey questions</h1>
             <br>
@@ -36,7 +38,7 @@
             </div>
         </form>
         <br>
-        <!-- Questions -->
+        <!-- Questions, each question is going to have an id -->
         <div>
             <h2>Question 1</h2>
             <p>Eating healthy and balanced foods is important for you.</p>
@@ -166,7 +168,7 @@
                         </div>
                         <div class="modal-body">
                                 <h2 id="match-name"></h2>
-                                <img id="match-photo" alt="">
+                                <img id="match-photo" alt="" style="max-width: 250px" style="max-height: 300px">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -174,18 +176,18 @@
                     </div>
                 </div>
             </div>
-
+<!-- JavaScript code used to get the information being submitted by the user, and it also allows lets us display the information coming from the match -->
     <script type="text/javascript">
-
+// This function is going to run whenever the user clicks the submit button
         $(".submit").on("click", function (event) {
             event.preventDefault();
-
+            // Here we validate the form to make sure all of the questions have been answered
             function validateForm() {
                 var isValid = true;
                 $(".form-control").each(function () {
                     if ($(this).val() === "") {
                         isValid = false;
-                    }
+                    };
                 });
 
                 $(".custom-select").each(function () {
@@ -197,7 +199,7 @@
             }
 
             if (validateForm()) {
-                // Here we grab the form elements
+                // Here we grab the answers to the form and also the answers to the questions and assing them to a variable named newFriend
                 var newFriend = {
                     name: $("#nameInput").val().trim(),
                     photo: $("#linkInput").val().trim(),
@@ -215,13 +217,13 @@
                         $("#q10").val(),
                     ]
                 };
-
+                // Here we send the data from the match to the modal, that way the user can see it
                 $.post("/api/friends", newFriend)
                     .then(function (data) {
 
                         $("#match-name").text(data.name);
                         $("#match-photo").attr("src", data.photo);
-
+                        // Here we empty the form and all of the answers to the questions once the user has clicked on the submit button
                         $("#nameInput").val("");
                         $("#linkInput").val("");
                         $("#q1").val("");
@@ -236,7 +238,7 @@
                         $("#q10").val("");
 
                     })
-
+            // If the user has not answered all of the questions and clicks submits, this message will pop up
             } else {
                 alert("Please fill out all fields before submitting your answers!");
             }
